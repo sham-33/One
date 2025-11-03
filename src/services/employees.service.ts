@@ -7,10 +7,7 @@ import { UpdateEmployeeDto } from '../dto/updateEmployee.dto';
 
 @Injectable()
 export class EmployeesService {
-  constructor(
-    @InjectRepository(Employee)
-    private readonly employeeRepository: Repository<Employee>,
-  ) {}
+  constructor(@InjectRepository(Employee) private readonly employeeRepository: Repository<Employee>) { }
 
   async create(createEmployeeDto: CreateEmployeeDto): Promise<Employee> {
     const employee = this.employeeRepository.create(createEmployeeDto);

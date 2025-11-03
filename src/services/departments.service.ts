@@ -10,7 +10,7 @@ export class DepartmentsService {
   constructor(
     @InjectRepository(Department)
     private readonly departmentRepository: Repository<Department>,
-  ) {}
+  ) { }
 
   async create(createDepartmentDto: CreateDepartmentDto): Promise<Department> {
     const department = this.departmentRepository.create(createDepartmentDto);

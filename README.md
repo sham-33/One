@@ -8,7 +8,6 @@ A RESTful API built with NestJS, PostgreSQL, and TypeORM for managing employees,
 - ✅ One-to-Many relationships (Department → Employees, Employee → Projects)
 - ✅ TypeORM with PostgreSQL
 - ✅ DTOs with validation using class-validator
-- ✅ Swagger API documentation
 - ✅ Advanced JOIN queries for reporting
 
 ## Prerequisites
@@ -49,10 +48,6 @@ npm run start:prod
 
 The API will be available at `http://localhost:3000`
 
-## API Documentation
-
-Swagger documentation is available at: `http://localhost:3000/api`
-
 ## API Endpoints
 
 ### Departments
@@ -90,6 +85,5 @@ Department (1) ----< (N) Employee (1) ----< (N) Project
 - NestJS 10.x
 - TypeORM 0.3.x
 - PostgreSQL
-- Swagger/OpenAPI
 - class-validator
 - class-transformer
