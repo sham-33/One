@@ -11,8 +11,8 @@ import {
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { DepartmentsService } from '../services/departments.service';
-import { CreateDepartmentDto } from '../dto/create-department.dto';
-import { UpdateDepartmentDto } from '../dto/update-department.dto';
+import { CreateDepartmentDto } from '../dto/createDepartment.dto';
+import { UpdateDepartmentDto } from '../dto/updateDepartment.dto';
 import { Department } from '../entities/department.entity';
 
 @ApiTags('Departments')

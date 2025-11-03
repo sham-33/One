@@ -11,8 +11,8 @@ import {
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { EmployeesService } from '../services/employees.service';
-import { CreateEmployeeDto } from '../dto/create-employee.dto';
-import { UpdateEmployeeDto } from '../dto/update-employee.dto';
+import { CreateEmployeeDto } from '../dto/createEmployee.dto';
+import { UpdateEmployeeDto } from '../dto/updateEmployee.dto';
 import { Employee } from '../entities/employee.entity';
 
 @ApiTags('Employees')
