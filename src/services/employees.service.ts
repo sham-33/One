@@ -2,15 +2,14 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Employee } from '../entities/employee.entity';
-import { CreateEmployeeDto } from '../dto/createEmployee.dto';
-import { UpdateEmployeeDto } from '../dto/updateEmployee.dto';
+import { EmployeeDto } from '../dto/employee.dto';
 
 @Injectable()
 export class EmployeesService {
   constructor(@InjectRepository(Employee) private readonly employeeRepository: Repository<Employee>) { }
 
-  async create(createEmployeeDto: CreateEmployeeDto): Promise<Employee> {
-    const employee = this.employeeRepository.create(createEmployeeDto);
+  async create(employeeDto: EmployeeDto): Promise<Employee> {
+    const employee = this.employeeRepository.create(employeeDto);
     return await this.employeeRepository.save(employee);
   }
 
@@ -30,12 +29,9 @@ export class EmployeesService {
     return employee;
   }
 
-  async update(
-    id: number,
-    updateEmployeeDto: UpdateEmployeeDto,
-  ): Promise<Employee> {
+  async update(id: number, employeeDto: EmployeeDto): Promise<Employee> {
     const employee = await this.findOne(id);
-    Object.assign(employee, updateEmployeeDto);
+    Object.assign(employee, employeeDto);
     return await this.employeeRepository.save(employee);
   }
 

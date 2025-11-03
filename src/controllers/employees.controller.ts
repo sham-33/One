@@ -10,8 +10,7 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { EmployeesService } from '../services/employees.service';
-import { CreateEmployeeDto } from '../dto/createEmployee.dto';
-import { UpdateEmployeeDto } from '../dto/updateEmployee.dto';
+import { EmployeeDto } from '../dto/employee.dto';
 import { Employee } from '../entities/employee.entity';
 
 @Controller('employees')
@@ -19,8 +18,8 @@ export class EmployeesController {
   constructor(private readonly employeesService: EmployeesService) {}
 
   @Post()
-  create(@Body() createEmployeeDto: CreateEmployeeDto): Promise<Employee> {
-    return this.employeesService.create(createEmployeeDto);
+  create(@Body() employeeDto: EmployeeDto): Promise<Employee> {
+    return this.employeesService.create(employeeDto);
   }
 
   @Get()
@@ -41,9 +40,9 @@ export class EmployeesController {
   @Put(':id')
   update(
     @Param('id') id: string,
-    @Body() updateEmployeeDto: UpdateEmployeeDto,
+    @Body() employeeDto: EmployeeDto,
   ): Promise<Employee> {
-    return this.employeesService.update(+id, updateEmployeeDto);
+    return this.employeesService.update(+id, employeeDto);
   }
 
   @Delete(':id')

@@ -10,17 +10,16 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { DepartmentsService } from '../services/departments.service';
-import { CreateDepartmentDto } from '../dto/createDepartment.dto';
-import { UpdateDepartmentDto } from '../dto/updateDepartment.dto';
+import { DepartmentDto } from '../dto/department.dto';
 import { Department } from '../entities/department.entity';
 
 @Controller('departments')
 export class DepartmentsController {
-  constructor(private readonly departmentsService: DepartmentsService) {}
+  constructor(private readonly departmentsService: DepartmentsService) { }
 
   @Post()
-  create(@Body() createDepartmentDto: CreateDepartmentDto): Promise<Department> {
-    return this.departmentsService.create(createDepartmentDto);
+  create(@Body() departmentDto: DepartmentDto): Promise<Department> {
+    return this.departmentsService.create(departmentDto);
   }
 
   @Get()
@@ -41,9 +40,9 @@ export class DepartmentsController {
   @Put(':id')
   update(
     @Param('id') id: string,
-    @Body() updateDepartmentDto: UpdateDepartmentDto,
+    @Body() departmentDto: DepartmentDto,
   ): Promise<Department> {
-    return this.departmentsService.update(+id, updateDepartmentDto);
+    return this.departmentsService.update(+id, departmentDto);
   }
 
   @Delete(':id')

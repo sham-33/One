@@ -2,8 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Project } from '../entities/project.entity';
-import { CreateProjectDto } from '../dto/createProject.dto';
-import { UpdateProjectDto } from '../dto/updateProject.dto';
+import { ProjectDto } from '../dto/project.dto';
 
 @Injectable()
 export class ProjectsService {
@@ -12,8 +11,8 @@ export class ProjectsService {
     private readonly projectRepository: Repository<Project>,
   ) { }
 
-  async create(createProjectDto: CreateProjectDto): Promise<Project> {
-    const project = this.projectRepository.create(createProjectDto);
+  async create(projectDto: ProjectDto): Promise<Project> {
+    const project = this.projectRepository.create(projectDto);
     return await this.projectRepository.save(project);
   }
 
@@ -33,12 +32,9 @@ export class ProjectsService {
     return project;
   }
 
-  async update(
-    id: number,
-    updateProjectDto: UpdateProjectDto,
-  ): Promise<Project> {
+  async update(id: number, projectDto: ProjectDto): Promise<Project> {
     const project = await this.findOne(id);
-    Object.assign(project, updateProjectDto);
+    Object.assign(project, projectDto);
     return await this.projectRepository.save(project);
   }
 
@@ -47,7 +43,6 @@ export class ProjectsService {
     await this.projectRepository.remove(project);
   }
 
-  // JOIN Query: Get all projects along with employee and department details
   async findAllWithDetails(): Promise<
     Array<{
       projectId: number;

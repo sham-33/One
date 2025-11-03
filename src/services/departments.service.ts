@@ -2,18 +2,14 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Department } from '../entities/department.entity';
-import { CreateDepartmentDto } from '../dto/createDepartment.dto';
-import { UpdateDepartmentDto } from '../dto/updateDepartment.dto';
+import { DepartmentDto } from '../dto/department.dto';
 
 @Injectable()
 export class DepartmentsService {
-  constructor(
-    @InjectRepository(Department)
-    private readonly departmentRepository: Repository<Department>,
-  ) { }
+  constructor(@InjectRepository(Department) private readonly departmentRepository: Repository<Department>,) { }
 
-  async create(createDepartmentDto: CreateDepartmentDto): Promise<Department> {
-    const department = this.departmentRepository.create(createDepartmentDto);
+  async create(departmentDto: DepartmentDto): Promise<Department> {
+    const department = this.departmentRepository.create(departmentDto);
     return await this.departmentRepository.save(department);
   }
 
@@ -33,12 +29,9 @@ export class DepartmentsService {
     return department;
   }
 
-  async update(
-    id: number,
-    updateDepartmentDto: UpdateDepartmentDto,
-  ): Promise<Department> {
+  async update(id: number, departmentDto: DepartmentDto): Promise<Department> {
     const department = await this.findOne(id);
-    Object.assign(department, updateDepartmentDto);
+    Object.assign(department, departmentDto);
     return await this.departmentRepository.save(department);
   }
 
@@ -47,10 +40,7 @@ export class DepartmentsService {
     await this.departmentRepository.remove(department);
   }
 
-  // JOIN Query: Count employees in each department
-  async getEmployeeCountByDepartment(): Promise<
-    Array<{ departmentId: number; departmentName: string; employeeCount: number }>
-  > {
+  async getEmployeeCountByDepartment(): Promise<Array<{ departmentId: number; departmentName: string; employeeCount: number }>> {
     const result = await this.departmentRepository
       .createQueryBuilder('department')
       .leftJoin('department.employees', 'employee')
